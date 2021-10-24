@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="wdith=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+        <link type="text/css" rel="stylesheet" href= {{ url_for('static', filename='css/apiForm.css') }}>
+        <title>NearbyLocations</title>
+        <style>
+            body {
+                padding: 25px;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <form action="{{url_for('apiRequest') }}" method="post">
+            <div class="form__title">Nearby Locations</div>
+            <div class="form__item">
+                <label for='client-api-key' class="form__label">API Key:</label>
+                <input type="text" class="form__input" id="client-api-key" name='client-api-key' placeholder="Enter the Foursquare API Key">
+                <span class="form__error">Sample error message</span>
+            </div>
+            <div class="form__item">
+                <label for='client-api-id' class="form__label">API Id:</label>
+                <input type="text" class="form__input" id="client-api-id" name='client-api-id' placeholder="Enter the Foursquare API ID">
+                <span class="form__error">Sample error message</span>
+            </div>
+            <div class="form__item">
+                <label for='region-title' class="form__label">Region Title:</label>
+                <input type="text" class="form__input" id="region-title" name="region-title" placeholder="Enter name of region (e.g Georgia Tech)">
+                <span class="form__error">Sample error message</span>
+            </div>
+            <div class="form__item">
+                <label for='center-location' class="form__label">Origin:</label>
+                <input type="text" class="form__input" id="center-location" name="center-location" placeholder="Enter coordinates (lat,long)">
+                <span class="form__error">Sample error message</span>
+            </div>
+            <div class="form__item">
+                <label for='search-radius' class="form__label">Search Radius:</label>
+                <input type="number" class="form__input" id="search-radius" name="search-radius" min="1" max="100000" placeholder="Enter a search radius (Max 100,000 meters)">
+                <span class="form__error">Sample error message</span>
+            </div>
+            <div class="form__item">
+                <label for='num-locations' class="form__label">Num Locations:</label>
+                <input type="number" class="form__input" id="num-locations" name="num-locations" min="1" max="50" placeholder="Enter max number of search results (Max 50)">
+                <span class="form__error">Sample error message</span>
+            </div>
+            <div class="form__item">
+                <button class="form__btn" type="submit">Request</button>
+            </div>
+        </form>
+        <script src="static/js/form.js"></script>
+    </body>
+</html>
