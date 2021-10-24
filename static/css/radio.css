@@ -1,0 +1,16 @@
+.radios {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+.radio {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 24px;
+}
+
+.radios__title {
+    font-size: 26px;
+}

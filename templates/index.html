@@ -6,6 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
         <link type="text/css" rel="stylesheet" href= {{ url_for('static', filename='css/apiForm.css') }}>
+        <link type="text/css" rel="stylesheet" href= {{ url_for('static', filename='css/radio.css') }}>
         <title>NearbyLocations</title>
         <style>
             body {
@@ -34,7 +35,7 @@
             </div>
             <div class="form__item">
                 <label for='center-location' class="form__label">Origin:</label>
-                <input type="text" class="form__input" id="center-location" name="center-location" placeholder="Enter coordinates (lat,long)">
+                <input type="text" class="form__input" id="center-location" name="center-location" placeholder="Enter coordinates (lat,lng)">
                 <span class="form__error">Sample error message</span>
             </div>
             <div class="form__item">
@@ -50,7 +51,22 @@
             <div class="form__item">
                 <button class="form__btn" type="submit">Request</button>
             </div>
+            <div class="radios">
+                <h1 class="radios__title">Select a location category:</h1>
+                <input type="radio" class="radio__input" id="arts" name="building-type" value="arts">
+                <label for="arts" class="radio">Arts & Entertainment</label><br>
+                <input type="radio" class="radio__input" id="college" name="building-type" value="college">
+                <label for="college" class="radio">College & University</label><br>
+                <input type="radio" class="radio__input" id="food" name="building-type" value="food">
+                <label for="food" class="radio">Food</label><br>
+                <input type="radio" class="radio__input" id="nightlife" name="building-type" value="nightlife">
+                <label for="nightlife" class="radio">Nightlife Spot</label><br>
+                <input type="radio" class="radio__input" id="outdoors" name="building-type" value="outdoors">
+                <label for="outdoors" class="radio">Outdoors & Recreation</label><br>
+                <input type="radio" class="radio__input" id="travel" name="building-type" value="travel">
+                <label for="travel" class="radio">Travel & Transport</label><br>
+            </div>
         </form>
-        <script src="static/js/form.js"></script>
+        <script src="/static/js/form.js"></script>
     </body>
 </html>

@@ -19,14 +19,38 @@ def apiRequest():
 
     url = 'https://api.foursquare.com/v2/venues/explore'
 
+    buildingCategoryDict = {"arts": "4d4b7104d754a06370d81259", 
+                            "college": "4d4b7105d754a06372d81259", 
+                            "food": "4d4b7105d754a06374d81259", 
+                            "nightlife": "4d4b7105d754a06376d81259", 
+                            "outdoors": "4d4b7105d754a06377d81259", 
+                            "travel": "4d4b7105d754a06379d81259"}
+    
+    client_id = request.form.get('client-api-id')
+    client_secret = request.form.get('client-api-key')
+    origin = request.form.get('center-location')
+    radius = request.form.get('search-radius')
+    maxResults = request.form.get('num-locations')
+    buildingType = request.form.get("building-type")
+    
+    inputVals = [client_id, client_secret, origin, radius, maxResults, buildingType]
+
+    for val in inputVals:
+        if val == "" or val == None:
+            return redirect(url_for("index"))
+        else:
+            pass
+
+    categoryId = buildingCategoryDict[buildingType]
+
     params = dict(
-    client_id = request.form.get('client-api-id'),
-    client_secret = request.form.get('client-api-key'),
-    v='20211023',
-    ll = request.form.get('center-location'),
-    radius= request.form.get('search-radius'),
-    limit= request.form.get('num-locations'),
-    categoryId = '4d4b7105d754a06372d81259'
+        client_id = client_id,
+        client_secret = client_secret,
+        v='20211023',
+        ll = origin,
+        radius= radius,
+        limit= maxResults,
+        categoryId = categoryId
     )
 
     resp = requests.get(url=url, params=params)
@@ -53,6 +77,7 @@ def apiRequest():
             buildingLat = item['venue']['location']['lat']
             buildingLng = item['venue']['location']['lng']
             buildingType = item['venue']['categories'][0]['name']
+            
             location = firestore.GeoPoint(buildingLat, buildingLng)
             content = [buildingName, location, buildingType]
             buildingList.append(Building(buildingName, location, buildingType))
@@ -65,4 +90,4 @@ def apiRequest():
     documentName = request.form.get('region-title')
     db.collection("Regions").document(documentName).set(masterDictionary)
     
-    return render_template("index.html")
+    return redirect(url_for("index"))
